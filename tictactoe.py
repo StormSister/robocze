@@ -27,7 +27,7 @@ def check_win(player_pos, cur_player):
     # wszystkie warunki wygranej
     soln = [[1, 2, 3], [4, 5, 6], [7, 8, 9], [1, 4, 7], [2, 5, 8], [3, 6, 9], [1, 5, 9], [3, 5, 7]]
 
-    # Lczy sa spelnine warunki wygranej
+    # czy sa spelnine warunki wygranej
     for x in soln:
         if all(y in player_pos[cur_player] for y in x):
 
@@ -75,32 +75,26 @@ def single_game(cur_player):
     # pojedyncza gra
     while True:
         print_board(values)
-        
+       
 
-        #ruch gracza
-        try:
-          print("Player ", cur_player,
-                "Where do you want to put the X?\nFirst digit : A,B or C specify the column\nSecond digit also 1,2,3 specify the row\n",
+        print(f"Player {cur_player}\nWhere do you want to put the {cur_player}?\nFirst digit : A,B or C specify the column\nSecond digit also 1,2,3 specify the row\n",
                 end="")
-          input_values = ['A1', 'A2', 'A3', 'B1', 'B2', 'B3', 'C1', 'C2', 'C3']
-          player_input = input().upper()
-          print(player_input)
-          player_input in input_values
-
-
-        except ValueError:
+        input_values = ['A1', 'A2', 'A3', 'B1', 'B2', 'B3', 'C1', 'C2', 'C3']
+        player_input = input().upper()
+        if player_input in input_values:
+            print(player_input)
+        else:
             print("Wrong Input!!! Try Again")
             continue
-
-
+        
         move = translate_input(player_input)
-        if move < 1 or move > 9:
-            print("Wrong Input!!! Try Again")
-            continue
+        
 
         # Czy pole jest zajete
         if values[move - 1] != '.':
+            
             print("Place already filled. Try again!!")
+            
             continue
 
         # informacje do tablicy wynikow
